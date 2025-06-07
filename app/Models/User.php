@@ -21,7 +21,7 @@ class User
         ]);
     }
     
-    public function findByEmail(string $email): bool
+    public function findByEmail(string $email): array|false
     {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);

@@ -2,6 +2,11 @@
 
 <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold text-center mb-6">Registration</h1>
+    <?php if (!empty($error)): ?>
+        <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded text-center mb-4 shadow-sm text-sm">
+            <?= htmlspecialchars($error) ?>
+        </div>
+    <?php endif; ?>
     <form method="POST" action="/IBIF/public/register" class="space-y-4">
         <div>
             <label class="block text-sm font-medium text-gray-700">Email:</label>
@@ -19,4 +24,10 @@
         Sign up
         </button>
     </form>
+    <div class="text-center mt-4">
+        <p class="text-sm text-gray-600">
+            Already have an account? 
+            <a href="/IBIF/public/login" class="text-blue-600 hover:text-blue-500">Sign in</a>
+        </p>
+    </div>
 </div>
