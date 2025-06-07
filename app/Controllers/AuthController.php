@@ -21,8 +21,12 @@ class AuthController
     public function login(): void
     {
         session_start();
-        View::render('auth/login');
-        
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->handleLogin();
+            return;
+        } else {
+            View::render('auth/login');
+        }        
     }
 
     public function register(): void
@@ -34,30 +38,65 @@ class AuthController
             View::render('auth/register');
         }
     }
+
+    private function handleLogin(): void
+    {
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            View::render('auth/login', ['error' => 'Invalid email address']);
+            exit;
+        }
+
+        $user = $this->userModel->findByEmail($email);
+        if ($user && password_verify($password, $user['password_hash'])) {
+            Auth::login([
+            'email' => $user['email'],
+            'role' => $user['role'],
+            ]);
+            if ($user['role'] === 'admin') {
+                header('Location: /IBIF/public/admin/dashboard');
+            } 
+            else {
+                header('Location: /IBIF/public/user/dashboard');
+            }
+            exit;
+        } 
+        else {
+            View::render('auth/login', [
+                'error' => 'Invalid email or password',
+                'email' => $email,
+            ]);
+            exit;
+        }
+    }
     
     private function handleRegister(): void
     {
         $email = trim($_POST['email']);
         $password = $_POST['password'];
         $confirm = $_POST['confirm_password'];
+        $error = "";
         
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            View::render('auth/register', ['error' => 'Invalid email address']);
-            exit;
+            $error = 'Invalid email address';
+        }
+        else if ($password !== $confirm) {
+            $error = 'Passwords do not match';
+        }
+        else if (strlen($password) < 6) {
+            $error = 'Password should be at least 6 characters long';
+        }
+        else if ($this->userModel->findByEmail($email)) {
+            $error = 'Email already exists';
         }
 
-        if ($password !== $confirm) {
-            View::render('auth/register', ['error' => 'Passwords do not match']);
-            exit;
-        }
-
-        if (strlen($password) < 6) {
-            View::render('auth/register', ['error' => 'Password too short']);
-            exit;
-        }
-
-        if ($this->userModel->findByEmail($email)) {
-            View::render('auth/register', ['error' => 'Email already exists']);
+        if($error){
+            View::render('auth/register', [
+                'error' => $error, 
+                'email' => $email
+            ]);
             exit;
         }
         
@@ -65,7 +104,7 @@ class AuthController
         $this->userModel->create($email, $passwordHash);
 
         Auth::login([
-            'username' => $email,
+            'email' => $email,
             'role' => 'user',
         ]);
 
