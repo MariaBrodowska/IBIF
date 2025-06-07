@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Core;
+require_once __DIR__ . '/Auth.php';
+use App\Core\Auth;
 
 class App
 {
@@ -17,21 +19,37 @@ class App
                 $controller->index();
                 break;
             case 'login':
+                if (Auth::check()) {
+                    header('Location: /IBIF/public/user/dashboard');
+                    exit;
+                }
                 require_once __DIR__ . '/../Controllers/AuthController.php';
                 $controller = new \App\Controllers\AuthController();
                 $controller->login();
                 break;
             case 'register':
+                if (Auth::check()) {
+                    header('Location: /IBIF/public/user/dashboard');
+                    exit;
+                }
                 require_once __DIR__ . '/../Controllers/AuthController.php';
                 $controller = new \App\Controllers\AuthController();
                 $controller->register();
                 break;
             case 'admin/dashboard':
+                if (!Auth::isAdmin()) {
+                    header('Location: /IBIF/public/login');
+                    exit;
+                }
                 require_once __DIR__ . '/../Controllers/AdminController.php';
                 $controller = new \App\Controllers\AdminController();
                 $controller->dashboard();
                 break;
             case 'user/dashboard':
+                if (!Auth::check()) {
+                    header('Location: /IBIF/public/login');
+                    exit;
+                }
                 require_once __DIR__ . '/../Controllers/UserController.php';
                 $controller = new \App\Controllers\UserController();
                 $controller->dashboard();
