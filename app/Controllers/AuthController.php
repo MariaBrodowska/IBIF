@@ -111,4 +111,11 @@ class AuthController
         header('Location: /IBIF/public/user/dashboard');
         exit;
     }
+
+    public function logout(): void
+    {
+        Auth::logout();
+        header('Location: /IBIF/public/login');
+        exit;
+    }
 }

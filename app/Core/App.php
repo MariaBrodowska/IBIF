@@ -44,6 +44,11 @@ class App
                 $controller = new \App\Controllers\AuthController($this->pdo);
                 $controller->register();
                 break;
+            case 'logout':
+                require_once __DIR__ . '/../Controllers/AuthController.php';
+                $controller = new \App\Controllers\AuthController($this->pdo);
+                $controller->logout();
+                break;
             case 'admin/dashboard':
                 if (!Auth::isAdmin()) {
                     header('Location: /IBIF/public/login');

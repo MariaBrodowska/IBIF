@@ -1,8 +1,17 @@
 <?php
+
+namespace App\Views;
+
+require_once __DIR__ . '/../../Core/Auth.php';
+use App\Core\Auth;
+
+$userEmail = $_SESSION['user']['email'] ?? 'user@gmail.com';
+$isAdmin = Auth::isAdmin();
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace('/IBIF/public/', '', $uri);
 $uri = trim($uri, '/');
-$currentPage = $uri ?: 'home';
+$currentPage = $uri ?: 'dashboard';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,17 +26,31 @@ $currentPage = $uri ?: 'home';
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold">IBIF</h1>
             <div class="space-x-4">
-                <a href="/IBIF/public/" 
-                   class="px-3 py-2 rounded <?= $currentPage === 'home' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
-                   Home
+
+                <?php if ($isAdmin): ?>
+                    <a href="/IBIF/public/admin/dashboard"
+                        class="px-3 py-2 rounded <?= $currentPage === 'admin/dashboard' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-500 transition-colors' ?>">
+                        Admin Dashboard
+                    </a>
+                <?php else: ?>                   
+                    <a href="/IBIF/public/user/dashboard"
+                        class="px-3 py-2 rounded <?= $currentPage === 'user/dashboard' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-500 transition-colors' ?>">
+                        Dashboard
+                    </a>
+                <?php endif; ?>
+
+                <a href="/IBIF/public/contact"
+                    class="px-3 py-2 rounded <?= $currentPage === 'contact' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-500 transition-colors' ?>">
+                    Contact
                 </a>
-                <a href="/IBIF/public/login" 
-                   class="px-3 py-2 rounded <?= $currentPage === 'login' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
-                   Login
+                <a href="" 
+                    class="px-3 py-2 rounded hover:bg-blue-500 transition-colors">
+                    Add Content
                 </a>
-                <a href="/IBIF/public/register" 
-                   class="px-3 py-2 rounded <?= $currentPage === 'register' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
-                   Register
+
+                <a href="/IBIF/public/logout"
+                class="px-3 py-2 rounded bg-red-600 hover:bg-red-700 transition-colors">
+                    Logout
                 </a>
             </div>
         </div>

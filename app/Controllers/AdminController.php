@@ -2,10 +2,13 @@
 
 namespace App\Controllers;
 
+require_once __DIR__ . '/../Core/View.php';
+use App\Core\View;
+
 class AdminController
 {
     public function dashboard(): void
     {
-        require_once __DIR__ . '/../Views/admin/dashboard.php';
+        View::render('admin/dashboard', [], 'app');
     }
 }
