@@ -2,15 +2,19 @@
 
 namespace App\Controllers;
 
+require_once __DIR__ . '/../Core/View.php';
+use App\Core\View;
+
 class AuthController
 {
     public function login(): void
     {
-        require_once __DIR__ . '/../Views/auth/login.php';
+        View::render('auth/login');
     }
 
     public function register(): void
     {
-        require_once __DIR__ . '/../Views/auth/register.php';
+        View::render('auth/register');
+        // require_once __DIR__ . '/../Views/auth/register.php';
     }
 }
