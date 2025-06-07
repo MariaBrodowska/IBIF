@@ -2,10 +2,18 @@
 
 namespace App\Core;
 require_once __DIR__ . '/Auth.php';
+require_once __DIR__ . '/../../config/db.php';
 use App\Core\Auth;
 
 class App
 {
+    private \PDO $pdo;
+
+    public function __construct()
+    {
+        global $pdo;
+        $this->pdo = $pdo;
+    }
     public function run(): void
     {
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -24,7 +32,7 @@ class App
                     exit;
                 }
                 require_once __DIR__ . '/../Controllers/AuthController.php';
-                $controller = new \App\Controllers\AuthController();
+                $controller = new \App\Controllers\AuthController($this->pdo);
                 $controller->login();
                 break;
             case 'register':
@@ -33,7 +41,7 @@ class App
                     exit;
                 }
                 require_once __DIR__ . '/../Controllers/AuthController.php';
-                $controller = new \App\Controllers\AuthController();
+                $controller = new \App\Controllers\AuthController($this->pdo);
                 $controller->register();
                 break;
             case 'admin/dashboard':
