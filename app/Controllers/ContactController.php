@@ -6,6 +6,6 @@ class ContactController
 {
     public function form(): void
     {
-        echo "<h1>Contact Page</h1>";
+        require_once __DIR__ . '/../Views/contact/contact.php';
     }
 }

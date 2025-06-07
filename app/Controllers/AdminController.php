@@ -6,6 +6,6 @@ class AdminController
 {
     public function dashboard(): void
     {
-        echo "<h1>Admin Dashboard</h1>";
+        require_once __DIR__ . '/../Views/admin/dashboard.php';
     }
 }

@@ -6,6 +6,6 @@ class UserController
 {
     public function dashboard(): void
     {
-        echo "<h1>User Dashboard</h1>";
+        require_once __DIR__ . '/../Views/user/dashboard.php';
     }
 }
