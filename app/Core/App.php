@@ -43,6 +43,9 @@ class App
             case 'contact':
                 $this->handleRequest('ContactController', 'form');
                 break;
+            case 'set-language':
+                $this->handleRequest('', '');
+                break;
             default:
                 http_response_code(404);
                 echo '404 - Not Found';

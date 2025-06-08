@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../Core/Auth.php';
 use App\Core\Auth;
 
 $isAdmin = Auth::isAdmin();
+$isUser = Auth::isUser();
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace('/IBIF/public/', '', $uri);
@@ -46,11 +47,18 @@ $currentPage = $uri ?: 'dashboard';
                     class="px-3 py-2 rounded <?= $currentPage === 'content' ?  'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                     Add Content
                 </a>
-
                 <a href="/IBIF/public/logout"
                 class="px-3 py-2 rounded bg-red-600 hover:bg-red-700 transition-colors">
                     Logout
                 </a>
+                <?php if ($isUser): ?>
+                <form method="POST" action="/IBIF/public/set-language" class="inline text-sm">
+                    <select name="language" onchange="this.form.submit()" class="text-black px-2 py-1 rounded">
+                        <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>English</option>
+                        <option value="pl" <?= ($_SESSION['lang'] ?? 'en') === 'pl' ? 'selected' : '' ?>>Polski</option>
+                    </select>
+                </form>
+                <?php endif; ?>
             </div>
         </div>
     </nav> 
