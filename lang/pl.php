@@ -26,5 +26,9 @@ return [
     'register_title' => 'Rejestracja',
     'home' => 'Strona główna',
     'no_account' => 'Nie masz jeszcze konta?',
-    'already_have_account' => 'Masz już konto?'
+    'already_have_account' => 'Masz już konto?',
+    'add_content' => 'Dodaj treść',
+    'title' => 'Tytuł',
+    'save' => 'Zapisz',
+    'fields_required' => 'Wszystkie pola są wymagane.',
 ];

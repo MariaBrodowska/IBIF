@@ -46,6 +46,12 @@ class App
             case 'set-language':
                 $this->handleRequest('LanguageController', 'setLanguage');
                 break;
+            case 'post/create':
+                $this->handleRequest('PostController', 'create');
+                break;
+            case 'post/store':
+                $this->handleRequest('PostController', 'store');
+                break;
             default:
                 http_response_code(404);
                 echo '404 - Not Found';

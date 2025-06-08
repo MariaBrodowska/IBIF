@@ -56,6 +56,7 @@ class AuthController
             Auth::login([
             'email' => $user['email'],
             'role' => $user['role'],
+            'id' => $user['id'],
             ]);
             $_SESSION['lang'] = $user['language'] ?? 'en';
             if ($user['role'] === 'admin') {

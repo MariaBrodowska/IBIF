@@ -27,4 +27,8 @@ return [
     'home' => 'Home',
     'no_account' => 'Don\'t have an account yet?',
     'already_have_account' => 'Already have an account?',
+    'add_content' => 'Add Content',
+    'title' => 'Title', 
+    'save' => 'Save',
+    'fields_required' => 'All fields are required.',
 ];
