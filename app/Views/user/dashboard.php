@@ -17,12 +17,41 @@ $userEmail = $_SESSION['user']['email'] ?? 'user@gmail.com';
         <ul class="text-gray-700">
             <li><strong><?= Lang::get('email') ?>:</strong> <?= htmlspecialchars($userEmail) ?></li>
             <li><strong><?= Lang::get('role') ?>:</strong> <?= $_SESSION['user']['role'] ?></li>
-            <li><strong><?= Lang::get('registration_date') ?>:</strong> <?= htmlspecialchars($registrationDate) ?></li>
+            <li><strong><?= Lang::get('registration_date') ?>:</strong> <?= date('Y-m-d H:i', strtotime($registrationDate)) ?></li>
         </ul>
     </div>
 
     <div class="bg-white p-6 rounded shadow">
         <h2 class="text-xl font-semibold mb-3"><?= Lang::get('your_content') ?></h2>
-        <p class="text-gray-600"><?= Lang::get('no_content') ?></p>
+        <?php if (!empty($posts)): ?>
+            <div class="space-y-4">
+                <?php foreach ($posts as $post): ?>
+                    <div class="border-b pb-2">
+                        <h3 class="text-lg font-semibold">
+                            <a href="/IBIF/public/post/show/<?= $post['id'] ?>" class="text-blue-600 hover:underline">
+                                <?= htmlspecialchars($post['title']) ?>
+                            </a>
+                        </h3>
+                        <p class="text-sm text-gray-500">
+                            <?= date('Y-m-d H:i', strtotime($post['created_at'])) ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <?php if ($totalPages > 1): ?>
+                <div class="mt-4 flex justify-center space-x-2">
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <a href="?page=<?= $i ?>" class="px-3 py-1 rounded 
+                            <?= $i === $currentPage ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-800' ?>">
+                            <?= $i ?>
+                        </a>
+                    <?php endfor; ?>
+                </div>
+            <?php endif; ?>
+
+        <?php else: ?>
+            <p class="text-gray-600"><?= Lang::get('no_content') ?></p>
+        <?php endif; ?>
     </div>
 </div>

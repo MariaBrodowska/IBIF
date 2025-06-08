@@ -45,10 +45,14 @@ $currentPage = $uri ?: 'dashboard';
                     class="px-3 py-2 rounded <?= $currentPage === 'contact' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                     <?= Lang::get('contact') ?>
                 </a>
+                
+                <?php if ($isUser): ?>
                 <a href="/IBIF/public/post/create" 
                     class="px-3 py-2 rounded <?= $currentPage === 'post/create' ?  'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                     <?= Lang::get('add_content') ?>
                 </a>
+                <?php endif; ?>
+
                 <a href="/IBIF/public/logout"
                     class="px-3 py-2 rounded bg-red-600 hover:bg-red-700 transition-colors">
                     <?= Lang::get('logout') ?>

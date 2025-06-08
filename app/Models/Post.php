@@ -30,4 +30,10 @@ class Post
         $stmt->execute([$userId]);
         return $stmt->fetchAll();
     }
+    public function getById(int $id): ?array
+    {
+        $stmt = $this->pdo->prepare('SELECT * FROM posts WHERE id = ?');
+        $stmt->execute([$id]);
+        return $stmt->fetch() ?: null;
+    }
 }

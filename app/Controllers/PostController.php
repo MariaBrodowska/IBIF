@@ -38,4 +38,15 @@ class PostController
             View::render('user/add_content', ['error' => 'fields_required'], 'app');
         }
     }
+
+    public function show(): void
+    {
+        Middleware::requireUser();
+        $id = (int)$_GET['id'];   
+        $post = $this->postModel->getById($id);
+        
+        if ($post) {
+            View::render('user/show_post', ['post' => $post], 'app');
+        }
+    }
 }

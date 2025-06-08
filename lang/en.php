@@ -31,4 +31,6 @@ return [
     'title' => 'Title', 
     'save' => 'Save',
     'fields_required' => 'All fields are required.',
+    'added_date' => 'Added date',
+    'back_to_dashboard' => 'Back to dashboard',
 ];

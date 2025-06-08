@@ -11,7 +11,9 @@ class App
 
     public function __construct()
     {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         global $pdo;
         $this->pdo = $pdo;
     }
@@ -20,6 +22,12 @@ class App
         $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         $uri = str_replace('/IBIF/public/', '', $uri);
         $uri = trim($uri, '/');
+
+        if (preg_match('/^post\/show\/(\d+)$/', $uri, $matches)) {
+            $_GET['id'] = $matches[1];
+            $this->handleRequest('PostController', 'show');
+            return;
+        }
 
         switch ($uri) {
             case '':

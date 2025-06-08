@@ -31,4 +31,6 @@ return [
     'title' => 'Tytuł',
     'save' => 'Zapisz',
     'fields_required' => 'Wszystkie pola są wymagane.',
+    'added_date' => 'Data dodania',
+    'back_to_dashboard' => 'Powrót do panelu',
 ];
