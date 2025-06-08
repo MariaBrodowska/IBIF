@@ -11,6 +11,7 @@ class App
 
     public function __construct()
     {
+        session_start();
         global $pdo;
         $this->pdo = $pdo;
     }
@@ -22,60 +23,51 @@ class App
 
         switch ($uri) {
             case '':
-                require_once __DIR__ . '/../Controllers/HomeController.php';
-                $controller = new \App\Controllers\HomeController();
-                $controller->index();
+                $this->handleRequest('HomeController', 'index');
                 break;
             case 'login':
-                if (Auth::check()) {
-                    header('Location: /IBIF/public/user/dashboard');
-                    exit;
-                }
-                require_once __DIR__ . '/../Controllers/AuthController.php';
-                $controller = new \App\Controllers\AuthController($this->pdo);
-                $controller->login();
+                $this->handleRequest('AuthController', 'login');
                 break;
             case 'register':
-                if (Auth::check()) {
-                    header('Location: /IBIF/public/user/dashboard');
-                    exit;
-                }
-                require_once __DIR__ . '/../Controllers/AuthController.php';
-                $controller = new \App\Controllers\AuthController($this->pdo);
-                $controller->register();
+                $this->handleRequest('AuthController', 'register');
                 break;
             case 'logout':
-                require_once __DIR__ . '/../Controllers/AuthController.php';
-                $controller = new \App\Controllers\AuthController($this->pdo);
-                $controller->logout();
+                $this->handleRequest('AuthController', 'logout');
                 break;
             case 'admin/dashboard':
-                if (!Auth::isAdmin()) {
-                    header('Location: /IBIF/public/login');
-                    exit;
-                }
-                require_once __DIR__ . '/../Controllers/AdminController.php';
-                $controller = new \App\Controllers\AdminController();
-                $controller->dashboard();
+                $this->handleRequest('AdminController', 'dashboard');
                 break;
             case 'user/dashboard':
-                if (!Auth::check()) {
-                    header('Location: /IBIF/public/login');
-                    exit;
-                }
-                require_once __DIR__ . '/../Controllers/UserController.php';
-                $controller = new \App\Controllers\UserController();
-                $controller->dashboard();
+                $this->handleRequest('UserController', 'dashboard');
                 break;
             case 'contact':
-                require_once __DIR__ . '/../Controllers/ContactController.php';
-                $controller = new \App\Controllers\ContactController();
-                $controller->form();
+                $this->handleRequest('ContactController', 'form');
                 break;
-
             default:
                 http_response_code(404);
                 echo '404 - Not Found';
         }
+    }
+
+    private function handleRequest(string $controller, string $method): void
+    {
+        $controllerFile = __DIR__ . "/../Controllers/{$controller}.php";
+        if (file_exists($controllerFile)) {
+            require_once $controllerFile;
+            $controllerClass = "\\App\\Controllers\\{$controller}";
+            if (class_exists($controllerClass)) {
+                if ($controller === 'AuthController') {
+                    $ctrl = new $controllerClass($this->pdo);
+                } else {
+                    $ctrl = new $controllerClass();
+                }
+                if (method_exists($ctrl, $method)) {
+                    $ctrl->$method();
+                    return;
+                }
+            }
+        }
+        http_response_code(404);
+        echo '404 - Not Found';
     }
 }

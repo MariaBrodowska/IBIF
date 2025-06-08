@@ -5,10 +5,12 @@ namespace App\Controllers;
 require_once __DIR__ . '/../Core/View.php';
 require_once __DIR__ . '/../Models/User.php';
 require_once __DIR__ . '/../Core/Auth.php';
+require_once __DIR__ . '/../Core/Middleware.php';
 
 use App\Core\View;
 use App\Models\User;
 use App\Core\Auth;
+use App\Core\Middleware;
 
 class AuthController
 {
@@ -20,7 +22,7 @@ class AuthController
 
     public function login(): void
     {
-        session_start();
+        Middleware::requireAuth();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->handleLogin();
             return;
@@ -31,7 +33,7 @@ class AuthController
 
     public function register(): void
     {
-        session_start();
+        Middleware::requireAuth();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->handleRegister();
         } else {
