@@ -44,7 +44,7 @@ class App
                 $this->handleRequest('ContactController', 'form');
                 break;
             case 'set-language':
-                $this->handleRequest('', '');
+                $this->handleRequest('LanguageController', 'setLanguage');
                 break;
             default:
                 http_response_code(404);

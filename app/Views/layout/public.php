@@ -1,4 +1,8 @@
 <?php
+
+require_once __DIR__ . '/../../Core/Lang.php';
+use App\Core\Lang;
+
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = str_replace('/IBIF/public/', '', $uri);
 $uri = trim($uri, '/');
@@ -19,16 +23,22 @@ $currentPage = $uri ?: 'home';
             <div class="space-x-4">
                 <a href="/IBIF/public/" 
                    class="px-3 py-2 rounded <?= $currentPage === 'home' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
-                   Home
+                   <?= Lang::get('home') ?>
                 </a>
                 <a href="/IBIF/public/login" 
                    class="px-3 py-2 rounded <?= $currentPage === 'login' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
-                   Login
+                   <?= Lang::get('login') ?>
                 </a>
                 <a href="/IBIF/public/register" 
                    class="px-3 py-2 rounded <?= $currentPage === 'register' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
-                   Register
+                   <?= Lang::get('register') ?>
                 </a>
+                <form method="POST" action="/IBIF/public/set-language" class="inline text-sm">
+                    <select name="language" onchange="this.form.submit()" class="text-black px-2 py-1 rounded">
+                        <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>English</option>
+                        <option value="pl" <?= ($_SESSION['lang'] ?? 'en') === 'pl' ? 'selected' : '' ?>>Polski</option>
+                    </select>
+                </form>
             </div>
         </div>
     </nav> 
