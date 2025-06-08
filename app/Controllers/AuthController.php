@@ -57,8 +57,8 @@ class AuthController
             'email' => $user['email'],
             'role' => $user['role'],
             ]);
+            $_SESSION['lang'] = $user['language'] ?? 'en';
             if ($user['role'] === 'admin') {
-                $_SESSION['lang'] = 'en';
                 header('Location: /IBIF/public/admin/dashboard');
             } 
             else {

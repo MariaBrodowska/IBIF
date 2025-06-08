@@ -47,4 +47,13 @@ class User
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
+
+    public function updateLanguage(string $email, string $lang): void
+    {
+        $stmt = $this->pdo->prepare("UPDATE users SET language = :lang WHERE email = :email");
+        $stmt->execute([
+            ':lang' => $lang,
+            ':email' => $email,
+        ]);
+    }
 }

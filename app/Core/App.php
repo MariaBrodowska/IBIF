@@ -59,7 +59,7 @@ class App
             require_once $controllerFile;
             $controllerClass = "\\App\\Controllers\\{$controller}";
             if (class_exists($controllerClass)) {
-                if (in_array($controller, ['AuthController', 'AdminController', 'UserController'])) {
+                if (!in_array($controller, ['ContactController', 'HomeController'])) {
                     $ctrl = new $controllerClass($this->pdo);
                 } else {
                     $ctrl = new $controllerClass();
