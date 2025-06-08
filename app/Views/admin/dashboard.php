@@ -3,7 +3,7 @@ namespace App\Views\Admin;
 $userEmail = $_SESSION['user']['email'] ?? 'user@gmail.com';
 ?>
 
-<h1>Admin Dashboard</h1>
+<h1 class="text-2xl font-bold mb-4">Admin Dashboard</h1>
 <p class="mb-4">Welcome <strong><?= htmlspecialchars($userEmail) ?></strong>!</p>
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">

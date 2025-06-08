@@ -28,6 +28,13 @@ class User
         return $stmt->fetch();
     }
 
+    public function getRegistrationDate(string $email): string|false
+    {
+        $stmt = $this->pdo->prepare("SELECT created_at FROM users WHERE email = :email");
+        $stmt->execute(['email' => $email]);
+        return $stmt->fetchColumn();
+    }
+
     public function countAll(): int {
         $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users");
         $stmt->execute();
