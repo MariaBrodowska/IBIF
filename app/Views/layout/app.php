@@ -5,7 +5,6 @@ namespace App\Views;
 require_once __DIR__ . '/../../Core/Auth.php';
 use App\Core\Auth;
 
-$userEmail = $_SESSION['user']['email'] ?? 'user@gmail.com';
 $isAdmin = Auth::isAdmin();
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -29,22 +28,22 @@ $currentPage = $uri ?: 'dashboard';
 
                 <?php if ($isAdmin): ?>
                     <a href="/IBIF/public/admin/dashboard"
-                        class="px-3 py-2 rounded <?= $currentPage === 'admin/dashboard' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-500 transition-colors' ?>">
-                        Admin Dashboard
+                        class="px-3 py-2 rounded <?= $currentPage === 'admin/dashboard' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
+                        Dashboard
                     </a>
                 <?php else: ?>                   
                     <a href="/IBIF/public/user/dashboard"
-                        class="px-3 py-2 rounded <?= $currentPage === 'user/dashboard' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-500 transition-colors' ?>">
+                        class="px-3 py-2 rounded <?= $currentPage === 'user/dashboard' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                         Dashboard
                     </a>
                 <?php endif; ?>
 
                 <a href="/IBIF/public/contact"
-                    class="px-3 py-2 rounded <?= $currentPage === 'contact' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-500 transition-colors' ?>">
+                    class="px-3 py-2 rounded <?= $currentPage === 'contact' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                     Contact
                 </a>
                 <a href="" 
-                    class="px-3 py-2 rounded hover:bg-blue-500 transition-colors">
+                    class="px-3 py-2 rounded <?= $currentPage === 'content' ?  'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                     Add Content
                 </a>
 

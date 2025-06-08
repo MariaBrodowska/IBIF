@@ -27,4 +27,17 @@ class User
         $stmt->execute(['email' => $email]);
         return $stmt->fetch();
     }
+
+    public function countAll(): int {
+        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users");
+        $stmt->execute();
+        return (int)$stmt->fetchColumn();
+    }    
+
+    public function getRecentUsers(int $limit = 5): array{
+        $stmt = $this->pdo->prepare("SELECT email, created_at FROM users ORDER BY created_at DESC LIMIT :limit");
+        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
 }
