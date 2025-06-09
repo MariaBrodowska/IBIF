@@ -39,4 +39,7 @@ return [
     'enter_your_email' => 'Wprowadź swój adres e-mail',
     'max_characters' => 'Maksymalna liczba znaków',
     'send' => 'Wyślij',
+    'message_sent' => 'Wiadomość została wysłana pomyślnie.',
+    'message_not_sent' => 'Wystąpił błąd podczas wysyłania wiadomości.',
+    'enter_fields' => 'Wprowadź wszystkie pola'
 ];

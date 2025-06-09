@@ -21,14 +21,14 @@ class Post
     public function all(): array
     {
         $stmt = $this->pdo->query('SELECT * FROM posts ORDER BY created_at DESC');
-        return $stmt->fetchAll();
+        return $stmt->fetchAll() ?: [];
     }
 
     public function getByUser(int $userId): array
     {
         $stmt = $this->pdo->prepare('SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC');
         $stmt->execute([$userId]);
-        return $stmt->fetchAll();
+        return $stmt->fetchAll() ?: [];
     }
     public function getById(int $id): ?array
     {

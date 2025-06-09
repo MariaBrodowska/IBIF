@@ -47,8 +47,8 @@ $currentPage = $uri ?: 'dashboard';
                 </a>
                 
                 <?php if ($isUser): ?>
-                <a href="/IBIF/public/post/create" 
-                    class="px-3 py-2 rounded <?= $currentPage === 'post/create' ?  'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
+                <a href="/IBIF/public/post" 
+                    class="px-3 py-2 rounded <?= $currentPage === 'post' ?  'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                     <?= Lang::get('add_content') ?>
                 </a>
                 <?php endif; ?>

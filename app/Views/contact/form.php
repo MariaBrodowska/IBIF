@@ -2,7 +2,7 @@
 
 require_once __DIR__ . '/../../Core/Lang.php';
 use App\Core\Lang;
-
+$title = Lang::get('contact');
 ?>
 
 <div class="max-w-xl mx-auto bg-white p-6 rounded shadow-md">
@@ -13,8 +13,8 @@ use App\Core\Lang;
     <?php elseif (!empty($error)): ?>
         <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= Lang::get(htmlspecialchars($error)) ?></div>
     <?php endif; ?>
-
-    <form action="/IBIF/public/contact" method="POST" class="space-y-4">
+ 
+    <form action="/IBIF/public/contact" method="POST" class="space-y-4" t>
         <div>
             <label class="block mb-1 font-medium"><?= Lang::get('email') ?>:</label>
             <input type="email" name="email" placeholder="<?= Lang::get('enter_your_email') ?>" value="<?= isset($email) ? htmlspecialchars($email) : "" ?>"required class="w-full border rounded px-3 py-2" maxlength="100"/>

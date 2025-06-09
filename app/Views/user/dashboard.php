@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../Core/Lang.php';
 use App\Core\Lang;
 
 $userEmail = $_SESSION['user']['email'] ?? 'user@gmail.com';
+$title = Lang::get('user_dashboard_title');
 ?>
 
 <h1 class="text-2xl font-bold mb-4"><?= Lang::get('user_dashboard_title') ?></h1>

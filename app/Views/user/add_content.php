@@ -16,7 +16,7 @@ $lang = $_SESSION['lang'] ?? 'en';
     <?php elseif (!empty($error)): ?>
         <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= Lang::get(htmlspecialchars($error)) ?></div>
     <?php endif; ?>
-    <form action="/IBIF/public/post/store" method="POST" class="space-y-4">
+    <form action="/IBIF/public/post" method="POST" class="space-y-4">
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
                 <?= Lang::get('title') ?>:

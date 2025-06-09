@@ -1,6 +1,7 @@
 <?php 
 namespace App\Views\Admin;
 $userEmail = $_SESSION['user']['email'] ?? 'user@gmail.com';
+$title = 'Admin Dashboard';
 ?>
 
 <h1 class="text-2xl font-bold mb-4">Admin Dashboard</h1>

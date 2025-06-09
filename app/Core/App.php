@@ -49,17 +49,22 @@ class App
                 $this->handleRequest('UserController', 'dashboard');
                 break;
             case 'contact':
-                $this->handleRequest('ContactController', 'form');
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $this->handleRequest('ContactController', 'submit');
+                } else {
+                    $this->handleRequest('ContactController', 'form');
+                }
                 break;
             case 'set-language':
                 $this->handleRequest('LanguageController', 'setLanguage');
                 break;
-            case 'post/create':
-                $this->handleRequest('PostController', 'create');
-                break;
-            case 'post/store':
-                $this->handleRequest('PostController', 'store');
-                break;
+            case 'post':
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    $this->handleRequest('PostController', 'store');
+                } else {
+                    $this->handleRequest('PostController', 'create');
+                }
+                break;    
             default:
                 http_response_code(404);
                 echo '404 - Not Found';

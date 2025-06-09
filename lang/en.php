@@ -39,4 +39,7 @@ return [
     'enter_your_email' => 'Enter your email address',
     'max_characters' => 'Max characters',
     'send' => 'Send',
+    'message_sent' => 'Message sent successfully.',
+    'message_not_sent' => 'Message could not be sent. Please try again later.',
+    'enter_fields' => 'Please fill in all fields'
 ];

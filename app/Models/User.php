@@ -21,39 +21,38 @@ class User
         ]);
     }
     
-    public function findByEmail(string $email): array|false
+    public function findByEmail(string $email): ?array
     {
         $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);
-        return $stmt->fetch();
+        return $stmt->fetch() ?: null;
     }
 
-    public function getRegistrationDate(string $email): string|false
+    public function getRegistrationDate(string $email): ?string
     {
         $stmt = $this->pdo->prepare("SELECT created_at FROM users WHERE email = :email");
         $stmt->execute(['email' => $email]);
-        return $stmt->fetchColumn();
+        $result = $stmt->fetchColumn();
+        return $result !== false ? $result : null;
     }
 
     public function countAll(): int {
-        $stmt = $this->pdo->prepare("SELECT COUNT(*) FROM users");
-        $stmt->execute();
+        $stmt = $this->pdo->query("SELECT COUNT(*) FROM users");
         return (int)$stmt->fetchColumn();
     }    
 
     public function getRecentUsers(int $limit = 5): array{
-        $stmt = $this->pdo->prepare("SELECT email, created_at FROM users ORDER BY created_at DESC LIMIT :limit");
-        $stmt->bindValue(':limit', $limit, \PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        $stmt = $this->pdo->prepare("SELECT email, created_at FROM users ORDER BY created_at DESC LIMIT $limit");
+                $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC) ?: [];
     }
 
     public function updateLanguage(string $email, string $lang): void
     {
         $stmt = $this->pdo->prepare("UPDATE users SET language = :lang WHERE email = :email");
         $stmt->execute([
-            ':lang' => $lang,
-            ':email' => $email,
+            'lang' => $lang,
+            'email' => $email,
         ]);
     }
 }
