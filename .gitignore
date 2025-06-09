@@ -19,7 +19,6 @@ composer.lock
 /public/uploads/*
 /tmp/*
 /temp/*
-*.sql
 *.sqlite
 *.db
 Thumbs.db
