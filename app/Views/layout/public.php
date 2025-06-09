@@ -20,7 +20,7 @@ $currentPage = $uri ?: 'home';
     <nav class="bg-blue-500 text-white p-4">
         <div class="container mx-auto flex justify-between items-center">
             <h1 class="text-xl font-bold">IBIF</h1>
-            <div class="space-x-4">
+            <div class="space-x-2 lg:space-x-4 text-sm md:text-base">
                 <a href="/IBIF/public/" 
                    class="px-3 py-2 rounded <?= $currentPage === 'home' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                    <?= Lang::get('home') ?>
@@ -28,10 +28,6 @@ $currentPage = $uri ?: 'home';
                 <a href="/IBIF/public/login" 
                    class="px-3 py-2 rounded <?= $currentPage === 'login' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                    <?= Lang::get('login') ?>
-                </a>
-                <a href="/IBIF/public/register" 
-                   class="px-3 py-2 rounded <?= $currentPage === 'register' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
-                   <?= Lang::get('register') ?>
                 </a>
                 <a href="/IBIF/public/contact" 
                    class="px-3 py-2 rounded <?= $currentPage === 'contact' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">

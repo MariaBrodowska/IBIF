@@ -41,5 +41,8 @@ return [
     'send' => 'Wyślij',
     'message_sent' => 'Wiadomość została wysłana pomyślnie.',
     'message_not_sent' => 'Wystąpił błąd podczas wysyłania wiadomości.',
-    'enter_fields' => 'Wprowadź wszystkie pola'
+    'enter_fields' => 'Wprowadź wszystkie pola',
+    'welcome_title' => "Witaj",
+    'welcome' => 'Witaj na naszej stronie',
+    'create_account' => 'Utwórz konto'
 ];

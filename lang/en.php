@@ -41,5 +41,8 @@ return [
     'send' => 'Send',
     'message_sent' => 'Message sent successfully.',
     'message_not_sent' => 'Message could not be sent. Please try again later.',
-    'enter_fields' => 'Please fill in all fields'
+    'enter_fields' => 'Please fill in all fields',
+    'welcome_title' => "Welcome",
+    'welcome' => 'Welcome to our website',
+    'create_account' => 'Create an account'
 ];

@@ -56,14 +56,14 @@ class ContactController
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'zadanietestowebrodowska@gmail.com';
-            $mail->Password = 'tymf kzsp mghf nfoa';
+            $mail->Username = $_ENV['SMTP_USER'];
+            $mail->Password = $_ENV['SMTP_PASS'];
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             $mail->Port = 587;
 
             $mail->CharSet = 'UTF-8';
             $mail->setFrom($email, 'Contact');
-            $mail->addAddress('mariabrodowska89@gmail.com');
+            $mail->addAddress($_ENV['SMTP_MAILTO']);
             $mail->addReplyTo($email);
 
             $mail->isHTML(true);

@@ -26,6 +26,12 @@ class UserController
         Middleware::requireUser();
         $email = $_SESSION['user']['email'] ?? '';
         $userId = $_SESSION['user']['id'] ?? null;
+        
+        if ($userId === null) {
+            header('Location: /IBIF/public/logout');
+            exit;
+        }
+        
         $posts = $this->postModel->getByUser($userId);
 
         $page = isset($_GET['page']) ? max(1, (int)$_GET['page']) : 1;

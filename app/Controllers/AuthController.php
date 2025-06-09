@@ -107,9 +107,11 @@ class AuthController
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $this->userModel->create($email, $passwordHash);
 
+        $user = $this->userModel->findByEmail($email);
         Auth::login([
-            'email' => $email,
-            'role' => 'user',
+            'email' => $user['email'],
+            'role' => $user['role'],
+            'id' => $user['id'],
         ]);
 
         header('Location: /IBIF/public/user/dashboard');
