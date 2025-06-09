@@ -8,6 +8,7 @@ cd IBIF
 
 ### 2. Zainstaluj zależności
 ```bash
+npm install
 composer install
 ```
 
@@ -33,8 +34,8 @@ Utwórz plik `.env` w głównym katalogu projektu i wypełnij go swoimi danymi:
 # Konfiguracja bazy danych
 DB_HOST=localhost
 DB_NAME=ibif
-DB_USER=ibif_user
-DB_PASS=secure_password
+DB_USER=root
+DB_PASS=
 DB_CHARSET=utf8mb4
 
 # Konfiguracja SMTP do wysyłki maili za pomocą PHPMailer
@@ -57,3 +58,13 @@ SMTP_MAILTO=mariabrodowska89@gmail.com
 **Dla XAMPP:**
 1. Uruchom Apache i MySQL w panelu kontrolnym XAMPP
 2. Otwórz przeglądarkę i przejdź na: `http://localhost/IBIF/public`
+
+### 6. Przykładowi użytkownicy
+
+**Admin:**
+- Email: admin@gmail.com
+- Hasło: admin123
+
+**User:**
+- Email: user@gmail.com
+- Hasło: user123
