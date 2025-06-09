@@ -11,24 +11,24 @@ $lang = $_SESSION['lang'] ?? 'en';
 
 <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
     <h1 class="text-2xl font-bold mb-4"><?= Lang::get('add_content') ?></h1>
-    <?php if (!empty($error)): ?>
-        <div class="bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded text-center mb-4 shadow-sm text-sm">
-            <?= Lang::get(htmlspecialchars($error)) ?>
-        </div>
+    <?php if (!empty($success)): ?>
+        <div class="bg-green-100 text-green-700 p-3 rounded mb-4"><?= Lang::get(htmlspecialchars($success)) ?></div>
+    <?php elseif (!empty($error)): ?>
+        <div class="bg-red-100 text-red-700 p-3 rounded mb-4"><?= Lang::get(htmlspecialchars($error)) ?></div>
     <?php endif; ?>
     <form action="/IBIF/public/post/store" method="POST" class="space-y-4">
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
                 <?= Lang::get('title') ?>:
             </label>
-            <input type="text" name="title" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <input type="text" name="title" value="<?= isset($title_input) ? htmlspecialchars($title_input) : "" ?>" class="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
         </div>
         
         <div>
             <label class="block text-sm font-medium text-gray-700 mb-2">
                 <?= Lang::get('content') ?>:
             </label>
-            <textarea id="content" name="content" rows="10" class="w-full border border-gray-300 rounded-md px-3 py-2"></textarea>
+            <textarea id="content" name="content" value="<?= isset($content) ? htmlspecialchars($content) : "" ?>" rows="10" class="w-full border border-gray-300 rounded-md px-3 py-2"></textarea>
         </div>
         
         <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md transition-colors">

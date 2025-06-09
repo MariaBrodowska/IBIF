@@ -33,6 +33,10 @@ $currentPage = $uri ?: 'home';
                    class="px-3 py-2 rounded <?= $currentPage === 'register' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
                    <?= Lang::get('register') ?>
                 </a>
+                <a href="/IBIF/public/contact" 
+                   class="px-3 py-2 rounded <?= $currentPage === 'contact' ? 'bg-blue-300 text-blue-900 font-semibold' : 'hover:bg-blue-400 transition-colors' ?>">
+                   <?= Lang::get('contact') ?>
+                </a>
                 <form method="POST" action="/IBIF/public/set-language" class="inline text-sm">
                     <select name="language" onchange="this.form.submit()" class="text-black px-2 py-1 rounded">
                         <option value="en" <?= ($_SESSION['lang'] ?? 'en') === 'en' ? 'selected' : '' ?>>English</option>

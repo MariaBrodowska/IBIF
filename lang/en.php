@@ -33,4 +33,10 @@ return [
     'fields_required' => 'All fields are required.',
     'added_date' => 'Added date',
     'back_to_dashboard' => 'Back to dashboard',
+    'message' => 'Message',
+    'content_added' => 'Content added successfully.',
+    'enter_your_message' => 'Enter your message',
+    'enter_your_email' => 'Enter your email address',
+    'max_characters' => 'Max characters',
+    'send' => 'Send',
 ];

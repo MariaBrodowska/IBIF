@@ -33,4 +33,10 @@ return [
     'fields_required' => 'Wszystkie pola są wymagane.',
     'added_date' => 'Data dodania',
     'back_to_dashboard' => 'Powrót do panelu',
+    'message' => 'Wiadomość',
+    'content_added' => 'Treść została dodana pomyślnie.',
+    'enter_your_message' => 'Wprowadź swoją wiadomość',
+    'enter_your_email' => 'Wprowadź swój adres e-mail',
+    'max_characters' => 'Maksymalna liczba znaków',
+    'send' => 'Wyślij',
 ];

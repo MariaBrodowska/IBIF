@@ -32,10 +32,14 @@ class PostController
 
             if ($title && $content && $userId) {
                 $this->postModel->create($title, $content, $userId);
-                header('Location: /IBIF/public/user/dashboard');
+                View::render('user/add_content', ['success' => 'content_added'], 'app');
                 exit;
             }
-            View::render('user/add_content', ['error' => 'fields_required'], 'app');
+            View::render('user/add_content', [
+                'error' => 'fields_required',
+                'title_input' => $title,
+                'content' => $content
+            ], 'app');
         }
     }
 
